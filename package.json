@@ -32,7 +32,8 @@
     "docs": "jsdoc -c .jsdoc.js",
     "docs-test": "linkinator docs",
     "predocs-test": "npm run docs",
-    "samples-test": "cd samples/ && npm link ../ && npm test && cd ../"
+    "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
+    "prelint": "cd samples; npm link ../; npm install"
   },
   "devDependencies": {
     "@types/mocha": "^9.0.0",
