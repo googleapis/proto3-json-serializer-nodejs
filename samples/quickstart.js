@@ -15,7 +15,7 @@
 'use strict';
 
 function main() {
-  // [START proto3_json_quickstart]
+  // [START proto3_json_serializer_quickstart]
   function quickstart() {
     const assert = require('assert');
     const path = require('path');
@@ -62,7 +62,7 @@ function main() {
 
     console.log('Quickstart completed');
   }
-  // [END proto3_json_quickstart]
+  // [END proto3_json_serializer_quickstart]
 
   quickstart();
 }
