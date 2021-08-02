@@ -19,7 +19,7 @@
     "deserialization"
   ],
   "scripts": {
-    "test": "c8 node -r source-map-support/register node_modules/.bin/mocha build/test/unit",
+    "test": "c8 node -r source-map-support/register node_modules/mocha/bin/mocha build/test/unit",
     "system-test": "mocha build/test/system",
     "lint": "gts lint",
     "clean": "gts clean",
@@ -33,7 +33,7 @@
     "docs-test": "linkinator docs",
     "predocs-test": "npm run docs",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
-    "prelint": "cd samples; npm link ../; npm install"
+    "prelint": "cd samples && npm link ../ && npm install"
   },
   "devDependencies": {
     "@types/mocha": "^9.0.0",
