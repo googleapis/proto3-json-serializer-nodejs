@@ -160,7 +160,7 @@ export function toProto3JSON(obj: protobuf.Message): JSONValue {
       value.constructor.name === 'Long',
       `toProto3JSON: don't know how to convert field ${key} with value ${value}`
     );
-    result[key] = (value as LongStub).toNumber();
+    result[key] = (value as LongStub).toString();
     continue;
   }
   return result;

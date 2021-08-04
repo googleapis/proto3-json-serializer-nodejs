@@ -79,7 +79,7 @@ function testTypeMismatch(root: protobuf.Root) {
 
   it('fromProto3JSON catches wrong value for integer fields', () => {
     assert.throws(() => {
-      fromProto3JSON(PrimitiveTypes, {integerField: '42'});
+      fromProto3JSON(PrimitiveTypes, {integerField: true});
     });
   });
 

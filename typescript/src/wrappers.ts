@@ -46,7 +46,7 @@ export function wrapperToProto3JSON(
       obj.value.constructor.name === 'Long',
       `wrapperToProto3JSON: expected to see a number, a string, a boolean, or a Long, but got ${obj.value}`
     );
-    return (obj.value as LongStub).toNumber();
+    return (obj.value as LongStub).toString();
   }
   return obj.value;
 }

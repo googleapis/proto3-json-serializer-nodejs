@@ -36,8 +36,8 @@ function testWrapperTypes(root: protobuf.Root) {
   const json = {
     doubleValueField: 3.14,
     floatValueField: 3.14,
-    int64ValueField: -42,
-    uint64ValueField: 42,
+    int64ValueField: '-42',
+    uint64ValueField: '42',
     int32ValueField: -43,
     uint32ValueField: 43,
     boolValueField: true,
