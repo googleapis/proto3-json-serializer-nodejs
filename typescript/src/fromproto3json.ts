@@ -163,7 +163,7 @@ export function fromProto3JSONToInternalRepresentation(
     } else if (
       fieldType.match(/^(?:(?:(?:u?int|fixed)(?:32|64))|float|double)$/)
     ) {
-      if (typeof value !== 'number') {
+      if (typeof value !== 'number' && typeof value !== 'string') {
         throw new Error(
           `fromProto3JSONToInternalRepresentation: field ${key} of type ${field.type} cannot contain value ${value}`
         );

@@ -36,8 +36,8 @@ function testPrimitiveTypes(root: protobuf.Root) {
     fixedIntegerField: 128,
     stringField: 'test',
     boolField: true,
-    int64Field: -43,
-    uint64Field: 43,
+    int64Field: '-43',
+    uint64Field: '43',
   };
 
   it('serializes to proto3 JSON', () => {
@@ -51,4 +51,26 @@ function testPrimitiveTypes(root: protobuf.Root) {
   });
 }
 
-testTwoTypesOfLoad('primitive types', testPrimitiveTypes);
+function testLongIntegers(root: protobuf.Root) {
+  const PrimitiveTypes = root.lookupType('test.PrimitiveTypes');
+  const message = PrimitiveTypes.fromObject({
+    int64Field: '-5011754511478056813',
+    uint64Field: '5011754511478056813',
+  });
+  const json = {
+    int64Field: '-5011754511478056813',
+    uint64Field: '5011754511478056813',
+  };
+
+  it('serializes uint64 to proto3 JSON', () => {
+    const serialized = toProto3JSON(message);
+    assert.deepStrictEqual(serialized, json);
+  });
+
+  it('deserializes uint64 from proto3 JSON', () => {
+    const deserialized = fromProto3JSON(PrimitiveTypes, json);
+    assert.deepStrictEqual(deserialized, message);
+  });
+}
+
+testTwoTypesOfLoad('primitive types', [testPrimitiveTypes, testLongIntegers]);
