@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import * as assert from 'assert';
+import * as protobuf from 'protobufjs';
 import {JSONObject, JSONValue, LongStub} from './types';
 import {Any, googleProtobufAnyToProto3JSON} from './any';
 import {bytesToProto3JSON} from './bytes';
