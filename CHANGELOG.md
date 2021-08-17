@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.1.2](https://www.github.com/googleapis/proto3-json-serializer-nodejs/compare/v0.1.1...v0.1.2) (2021-08-17)
+
+
+### Bug Fixes
+
+* use imported protobufjs in toproto3json.ts ([#9](https://www.github.com/googleapis/proto3-json-serializer-nodejs/issues/9)) ([f6c86c7](https://www.github.com/googleapis/proto3-json-serializer-nodejs/commit/f6c86c777d567d8430b09dea3282e52af24d890f))
+
 ### [0.1.1](https://www.github.com/googleapis/proto3-json-serializer-nodejs/compare/v0.1.0...v0.1.1) (2021-08-04)
 
 
