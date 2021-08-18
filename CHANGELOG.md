@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.1.3](https://www.github.com/googleapis/proto3-json-serializer-nodejs/compare/v0.1.2...v0.1.3) (2021-08-18)
+
+
+### Bug Fixes
+
+* do not fail for unknown enum values ([#11](https://www.github.com/googleapis/proto3-json-serializer-nodejs/issues/11)) ([ff9f0f1](https://www.github.com/googleapis/proto3-json-serializer-nodejs/commit/ff9f0f1881b1aafacd693b4e24eaee9e56aff79c))
+
 ### [0.1.2](https://www.github.com/googleapis/proto3-json-serializer-nodejs/compare/v0.1.1...v0.1.2) (2021-08-17)
 
 
