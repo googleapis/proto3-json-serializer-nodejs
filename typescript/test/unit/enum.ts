@@ -37,6 +37,18 @@ function testEnum(root: protobuf.Root) {
     const deserialized = fromProto3JSON(MessageWithEnum, json);
     assert.deepStrictEqual(deserialized, message);
   });
+
+  it('fromProto3JSON allows unknown enum string value', () => {
+    // the following call should not fail
+    fromProto3JSON(MessageWithEnum, {
+      enumField: 'WRONG VALUE',
+    });
+  });
+
+  it('fromProto3JSON allows unknown enum number value', () => {
+    // the following call should not fail
+    fromProto3JSON(MessageWithEnum, {enumField: 42});
+  });
 }
 
 testTwoTypesOfLoad('enum field', testEnum);

@@ -119,18 +119,6 @@ function testTypeMismatch(root: protobuf.Root) {
     });
   });
 
-  it('fromProto3JSON does not allow unknown enum string value', () => {
-    assert.throws(() => {
-      fromProto3JSON(MessageWithEnum, {enumField: 'WRONG VALUE'});
-    });
-  });
-
-  it('fromProto3JSON does not allow unknown enum number value', () => {
-    assert.throws(() => {
-      fromProto3JSON(MessageWithEnum, {enumField: 42});
-    });
-  });
-
   it('fromProto3JSON does not allow primitive types for Struct values', () => {
     assert.throws(() => {
       fromProto3JSON(MessageWithStruct, {structField: 42});
