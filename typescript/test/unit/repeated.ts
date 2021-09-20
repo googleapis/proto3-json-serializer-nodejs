@@ -55,4 +55,24 @@ function testRepeated(root: protobuf.Root) {
   });
 }
 
+function testEmptyRepeated(root: protobuf.Root) {
+  const MessageWithRepeated = root.lookupType('test.MessageWithRepeated');
+  const message = MessageWithRepeated.fromObject({
+    repeatedString: [],
+    repeatedMessage: [],
+  });
+  const json = {};
+
+  it('serializes to proto3 JSON', () => {
+    const serialized = toProto3JSON(message);
+    assert.deepStrictEqual(serialized, json);
+  });
+
+  it('deserializes from proto3 JSON', () => {
+    const deserialized = fromProto3JSON(MessageWithRepeated, json);
+    assert.deepStrictEqual(deserialized, message);
+  });
+}
+
 testTwoTypesOfLoad('repeated fields', testRepeated);
+testTwoTypesOfLoad('empty repeated fields', testEmptyRepeated);
