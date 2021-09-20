@@ -110,6 +110,10 @@ export function toProto3JSON(obj: protobuf.Message): JSONValue {
       continue;
     }
     if (Array.isArray(value)) {
+      if (value.length === 0) {
+        // ignore repeated fields with no values
+        continue;
+      }
       // if the repeated value has a complex type, convert it to proto3 JSON, otherwise use as is
       result[key] = value.map(
         fieldResolvedType
