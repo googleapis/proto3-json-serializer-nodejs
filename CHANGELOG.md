@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.1.4](https://www.github.com/googleapis/proto3-json-serializer-nodejs/compare/v0.1.3...v0.1.4) (2021-09-20)
+
+
+### Bug Fixes
+
+* do not emit empty lists to JSON ([#15](https://www.github.com/googleapis/proto3-json-serializer-nodejs/issues/15)) ([af9dfd6](https://www.github.com/googleapis/proto3-json-serializer-nodejs/commit/af9dfd65efb84cfb31af0faca805f53b0ffa9874))
+
 ### [0.1.3](https://www.github.com/googleapis/proto3-json-serializer-nodejs/compare/v0.1.2...v0.1.3) (2021-08-18)
 
 
