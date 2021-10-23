@@ -3,7 +3,7 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -61,7 +61,7 @@ message MapValue {
 
 message MessageWithRepeated {
     repeated string repeated_string = 3;
-    repeated RepeatedValue repeated_message = 4;    
+    repeated RepeatedValue repeated_message = 4;
 }
 
 message RepeatedValue {
@@ -123,6 +123,9 @@ message MessageWithWrappers {
     google.protobuf.BoolValue bool_value_field = 7;
     google.protobuf.StringValue string_value_field = 8;
     google.protobuf.BytesValue bytes_value_field = 9;
+    google.protobuf.DoubleValue nan_value_field = 10;
+    google.protobuf.DoubleValue infinity_value_field = 11;
+    google.protobuf.DoubleValue negative_infinity_value_field = 12;
 }
 
 message MessageWithFieldMask {

@@ -32,6 +32,9 @@ function testWrapperTypes(root: protobuf.Root) {
     boolValueField: {value: true},
     stringValueField: {value: 'test'},
     bytesValueField: {value: buffer},
+    nanValueField: {value: NaN},
+    infinityValueField: {value: Infinity},
+    negativeInfinityValueField: {value: -Infinity},
   });
   const json = {
     doubleValueField: 3.14,
@@ -43,6 +46,9 @@ function testWrapperTypes(root: protobuf.Root) {
     boolValueField: true,
     stringValueField: 'test',
     bytesValueField: buffer.toString('base64'),
+    nanValueField: 'NaN',
+    infinityValueField: 'Infinity',
+    negativeInfinityValueField: '-Infinity',
   };
 
   const messageWithNulls = MessageWithWrappers.fromObject({
