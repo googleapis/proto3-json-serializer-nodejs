@@ -60,7 +60,6 @@ export function toProto3JSON(obj: protobuf.Message): JSONValue {
   }
 
   if (typeName === '.google.protobuf.Value') {
-    console.log('--------typename is .google.protobuf.Value');
     return googleProtobufValueToProto3JSON(obj as protobuf.Message & Value);
   }
 
