@@ -70,6 +70,9 @@ export function googleProtobufValueToProto3JSON(
     Object.prototype.hasOwnProperty.call(obj, 'numberValue') &&
     typeof obj.numberValue === 'number'
   ) {
+    if (!Number.isFinite(obj.numberValue)) {
+      return obj.numberValue.toString();
+    }
     return obj.numberValue;
   }
 
@@ -140,6 +143,15 @@ export function googleProtobufValueFromProto3JSON(
   }
 
   if (typeof json === 'string') {
+    if (json === 'NaN') {
+      return {numberValue: NaN};
+    }
+    if (json === 'Infinity') {
+      return {numberValue: Infinity};
+    }
+    if (json === '-Infinity') {
+      return {numberValue: -Infinity};
+    }
     return {stringValue: json};
   }
 

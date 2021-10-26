@@ -33,7 +33,25 @@ function testGoogleProtobufValue(root: protobuf.Root) {
       numberValue: 42,
     },
   });
+  const messageNaN = MessageWithValue.fromObject({
+    valueField: {
+      numberValue: NaN,
+    },
+  });
+  const messageInfinity = MessageWithValue.fromObject({
+    valueField: {
+      numberValue: Infinity,
+    },
+  });
+  const messageNegInfinity = MessageWithValue.fromObject({
+    valueField: {
+      numberValue: -Infinity,
+    },
+  });
   const jsonNumber = {valueField: 42};
+  const jsonNaN = {valueField: 'NaN'};
+  const jsonInfinity = {valueField: 'Infinity'};
+  const jsonNegInfinity = {valueField: '-Infinity'};
   const messageString = MessageWithValue.fromObject({
     valueField: {
       stringValue: 'test',
@@ -139,6 +157,36 @@ function testGoogleProtobufValue(root: protobuf.Root) {
   it('deserializes NumberValue from proto3 JSON', () => {
     const deserialized = fromProto3JSON(MessageWithValue, jsonNumber);
     assert.deepStrictEqual(deserialized, messageNumber);
+  });
+
+  it('serializes NaN to proto3 JSON', () => {
+    const serialized = toProto3JSON(messageNaN);
+    assert.deepStrictEqual(serialized, jsonNaN);
+  });
+
+  it('deserializes NaN from proto3 JSON', () => {
+    const deserialized = fromProto3JSON(MessageWithValue, jsonNaN);
+    assert.deepStrictEqual(deserialized, messageNaN);
+  });
+
+  it('serializes Infinity to proto3 JSON', () => {
+    const serialized = toProto3JSON(messageInfinity);
+    assert.deepStrictEqual(serialized, jsonInfinity);
+  });
+
+  it('deserializes Infinity from proto3 JSON', () => {
+    const deserialized = fromProto3JSON(MessageWithValue, jsonInfinity);
+    assert.deepStrictEqual(deserialized, messageInfinity);
+  });
+
+  it('serializes negative Infinity to proto3 JSON', () => {
+    const serialized = toProto3JSON(messageNegInfinity);
+    assert.deepStrictEqual(serialized, jsonNegInfinity);
+  });
+
+  it('deserializes Infinity from proto3 JSON', () => {
+    const deserialized = fromProto3JSON(MessageWithValue, jsonNegInfinity);
+    assert.deepStrictEqual(deserialized, messageNegInfinity);
   });
 
   it('serializes StringValue to proto3 JSON', () => {
