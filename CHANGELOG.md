@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.1.5](https://www.github.com/googleapis/proto3-json-serializer-nodejs/compare/v0.1.4...v0.1.5) (2021-10-26)
+
+
+### Bug Fixes
+
+* JSON accept special string for NaN, Infinity ([#19](https://www.github.com/googleapis/proto3-json-serializer-nodejs/issues/19)) ([01a345b](https://www.github.com/googleapis/proto3-json-serializer-nodejs/commit/01a345b7b1d62ee65a8673737975980d274fa22a))
+
 ### [0.1.4](https://www.github.com/googleapis/proto3-json-serializer-nodejs/compare/v0.1.3...v0.1.4) (2021-09-20)
 
 
