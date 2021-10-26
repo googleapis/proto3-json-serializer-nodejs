@@ -166,7 +166,17 @@ function testGoogleProtobufValue(root: protobuf.Root) {
 
   it('deserializes NaN from proto3 JSON', () => {
     const deserialized = fromProto3JSON(MessageWithValue, jsonNaN);
-    assert.deepStrictEqual(deserialized, messageNaN);
+    // Attempting to serialize NaN or Infinity results in error.
+    // "NaN" would parse as string_value, not number_value.
+    // https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.Value
+    assert.deepStrictEqual(
+      deserialized,
+      MessageWithValue.fromObject({
+        valueField: {
+          stringValue: 'NaN',
+        },
+      })
+    );
   });
 
   it('serializes Infinity to proto3 JSON', () => {
@@ -176,7 +186,17 @@ function testGoogleProtobufValue(root: protobuf.Root) {
 
   it('deserializes Infinity from proto3 JSON', () => {
     const deserialized = fromProto3JSON(MessageWithValue, jsonInfinity);
-    assert.deepStrictEqual(deserialized, messageInfinity);
+    // Attempting to serialize NaN or Infinity results in error.
+    // "Infinity" would parse as string_value, not number_value.
+    // https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.Value
+    assert.deepStrictEqual(
+      deserialized,
+      MessageWithValue.fromObject({
+        valueField: {
+          stringValue: 'Infinity',
+        },
+      })
+    );
   });
 
   it('serializes negative Infinity to proto3 JSON', () => {
@@ -186,7 +206,17 @@ function testGoogleProtobufValue(root: protobuf.Root) {
 
   it('deserializes Infinity from proto3 JSON', () => {
     const deserialized = fromProto3JSON(MessageWithValue, jsonNegInfinity);
-    assert.deepStrictEqual(deserialized, messageNegInfinity);
+    // Attempting to serialize NaN, Infinity, negative Infinity results in error.
+    // "-Infinity" would parse as string_value, not number_value.
+    // https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.Value
+    assert.deepStrictEqual(
+      deserialized,
+      MessageWithValue.fromObject({
+        valueField: {
+          stringValue: '-Infinity',
+        },
+      })
+    );
   });
 
   it('serializes StringValue to proto3 JSON', () => {

@@ -143,15 +143,6 @@ export function googleProtobufValueFromProto3JSON(
   }
 
   if (typeof json === 'string') {
-    if (json === 'NaN') {
-      return {numberValue: NaN};
-    }
-    if (json === 'Infinity') {
-      return {numberValue: Infinity};
-    }
-    if (json === '-Infinity') {
-      return {numberValue: -Infinity};
-    }
     return {stringValue: json};
   }
 
