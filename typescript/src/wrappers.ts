@@ -33,8 +33,7 @@ export interface BytesValue {
 }
 
 export function wrapperToProto3JSON(
-  obj: protobuf.Message & (NumberValue | StringValue | BoolValue | BytesValue),
-  typeName?: string
+  obj: protobuf.Message & (NumberValue | StringValue | BoolValue | BytesValue)
 ) {
   if (!Object.prototype.hasOwnProperty.call(obj, 'value')) {
     return null;
@@ -50,11 +49,7 @@ export function wrapperToProto3JSON(
     return (obj.value as LongStub).toString();
   }
   // JSON accept special string values "NaN", "Infinity", and "-Infinity".
-  if (
-    typeName &&
-    typeName === '.google.protobuf.DoubleValue' &&
-    !Number.isFinite(obj.value)
-  ) {
+  if (typeof obj.value === 'number' && !Number.isFinite(obj.value)) {
     return obj.value.toString();
   }
   return obj.value;

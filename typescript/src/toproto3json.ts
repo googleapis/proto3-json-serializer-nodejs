@@ -94,8 +94,7 @@ export function toProto3JSON(obj: protobuf.Message): JSONValue {
   if (wrapperTypes.has(typeName)) {
     return wrapperToProto3JSON(
       obj as protobuf.Message &
-        (NumberValue | StringValue | BoolValue | BytesValue),
-      typeName
+        (NumberValue | StringValue | BoolValue | BytesValue)
     );
   }
 
