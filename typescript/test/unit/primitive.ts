@@ -73,4 +73,54 @@ function testLongIntegers(root: protobuf.Root) {
   });
 }
 
-testTwoTypesOfLoad('primitive types', [testPrimitiveTypes, testLongIntegers]);
+function testNotFiniteNumber(root: protobuf.Root) {
+  const PrimitiveTypes = root.lookupType('test.PrimitiveTypes');
+  const messageNaN = PrimitiveTypes.fromObject({
+    doubleField: NaN,
+  });
+  const jsonNaN = {
+    doubleField: 'NaN',
+  };
+  const messageInfinity = PrimitiveTypes.fromObject({
+    doubleField: Infinity,
+  });
+  const jsonInfinity = {
+    doubleField: 'Infinity',
+  };
+  const messageNegInfinity = PrimitiveTypes.fromObject({
+    doubleField: Infinity,
+  });
+  const jsonNegInfinity = {
+    doubleField: 'Infinity',
+  };
+  it('serializes NaN to proto3 JSON', () => {
+    const serialized = toProto3JSON(messageNaN);
+    assert.deepStrictEqual(serialized, jsonNaN);
+  });
+  it('deserializes NaN from proto3 JSON', () => {
+    const deserialized = fromProto3JSON(PrimitiveTypes, jsonNaN);
+    assert.deepStrictEqual(deserialized, messageNaN);
+  });
+  it('serializes Infinity to proto3 JSON', () => {
+    const serialized = toProto3JSON(messageInfinity);
+    assert.deepStrictEqual(serialized, jsonInfinity);
+  });
+  it('deserializes Infinity from proto3 JSON', () => {
+    const deserialized = fromProto3JSON(PrimitiveTypes, jsonInfinity);
+    assert.deepStrictEqual(deserialized, messageInfinity);
+  });
+  it('serializes negative Infinity to proto3 JSON', () => {
+    const serialized = toProto3JSON(messageNegInfinity);
+    assert.deepStrictEqual(serialized, jsonNegInfinity);
+  });
+  it('deserializes negative Infinity from proto3 JSON', () => {
+    const deserialized = fromProto3JSON(PrimitiveTypes, jsonNegInfinity);
+    assert.deepStrictEqual(deserialized, messageNegInfinity);
+  });
+}
+
+testTwoTypesOfLoad('primitive types', [
+  testPrimitiveTypes,
+  testLongIntegers,
+  testNotFiniteNumber,
+]);

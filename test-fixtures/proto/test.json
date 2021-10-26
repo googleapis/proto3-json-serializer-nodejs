@@ -31,6 +31,10 @@
             "uint64Field": {
               "type": "uint64",
               "id": 7
+            },
+            "doubleField": {
+              "type": "double",
+              "id": 8
             }
           }
         },
