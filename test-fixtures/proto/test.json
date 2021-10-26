@@ -31,6 +31,10 @@
             "uint64Field": {
               "type": "uint64",
               "id": 7
+            },
+            "doubleField": {
+              "type": "double",
+              "id": 8
             }
           }
         },
@@ -242,6 +246,18 @@
             "bytesValueField": {
               "type": "google.protobuf.BytesValue",
               "id": 9
+            },
+            "nanValueField": {
+              "type": "google.protobuf.DoubleValue",
+              "id": 10
+            },
+            "infinityValueField": {
+              "type": "google.protobuf.DoubleValue",
+              "id": 11
+            },
+            "negativeInfinityValueField": {
+              "type": "google.protobuf.DoubleValue",
+              "id": 12
             }
           }
         },

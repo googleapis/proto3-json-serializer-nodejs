@@ -153,6 +153,10 @@ export function toProto3JSON(obj: protobuf.Message): JSONValue {
       typeof value === 'boolean' ||
       value === null
     ) {
+      if (typeof value === 'number' && !Number.isFinite(value)) {
+        result[key] = value.toString();
+        continue;
+      }
       result[key] = value;
       continue;
     }

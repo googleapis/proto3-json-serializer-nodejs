@@ -70,6 +70,9 @@ export function googleProtobufValueToProto3JSON(
     Object.prototype.hasOwnProperty.call(obj, 'numberValue') &&
     typeof obj.numberValue === 'number'
   ) {
+    if (!Number.isFinite(obj.numberValue)) {
+      return obj.numberValue.toString();
+    }
     return obj.numberValue;
   }
 

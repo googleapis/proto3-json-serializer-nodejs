@@ -33,7 +33,25 @@ function testGoogleProtobufValue(root: protobuf.Root) {
       numberValue: 42,
     },
   });
+  const messageNaN = MessageWithValue.fromObject({
+    valueField: {
+      numberValue: NaN,
+    },
+  });
+  const messageInfinity = MessageWithValue.fromObject({
+    valueField: {
+      numberValue: Infinity,
+    },
+  });
+  const messageNegInfinity = MessageWithValue.fromObject({
+    valueField: {
+      numberValue: -Infinity,
+    },
+  });
   const jsonNumber = {valueField: 42};
+  const jsonNaN = {valueField: 'NaN'};
+  const jsonInfinity = {valueField: 'Infinity'};
+  const jsonNegInfinity = {valueField: '-Infinity'};
   const messageString = MessageWithValue.fromObject({
     valueField: {
       stringValue: 'test',
@@ -139,6 +157,66 @@ function testGoogleProtobufValue(root: protobuf.Root) {
   it('deserializes NumberValue from proto3 JSON', () => {
     const deserialized = fromProto3JSON(MessageWithValue, jsonNumber);
     assert.deepStrictEqual(deserialized, messageNumber);
+  });
+
+  it('serializes NaN to proto3 JSON', () => {
+    const serialized = toProto3JSON(messageNaN);
+    assert.deepStrictEqual(serialized, jsonNaN);
+  });
+
+  it('deserializes NaN from proto3 JSON', () => {
+    const deserialized = fromProto3JSON(MessageWithValue, jsonNaN);
+    // Attempting to serialize NaN or Infinity results in error.
+    // "NaN" would parse as string_value, not number_value.
+    // https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.Value
+    assert.deepStrictEqual(
+      deserialized,
+      MessageWithValue.fromObject({
+        valueField: {
+          stringValue: 'NaN',
+        },
+      })
+    );
+  });
+
+  it('serializes Infinity to proto3 JSON', () => {
+    const serialized = toProto3JSON(messageInfinity);
+    assert.deepStrictEqual(serialized, jsonInfinity);
+  });
+
+  it('deserializes Infinity from proto3 JSON', () => {
+    const deserialized = fromProto3JSON(MessageWithValue, jsonInfinity);
+    // Attempting to serialize NaN or Infinity results in error.
+    // "Infinity" would parse as string_value, not number_value.
+    // https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.Value
+    assert.deepStrictEqual(
+      deserialized,
+      MessageWithValue.fromObject({
+        valueField: {
+          stringValue: 'Infinity',
+        },
+      })
+    );
+  });
+
+  it('serializes negative Infinity to proto3 JSON', () => {
+    const serialized = toProto3JSON(messageNegInfinity);
+    assert.deepStrictEqual(serialized, jsonNegInfinity);
+  });
+
+  it('deserializes Infinity from proto3 JSON', () => {
+    const deserialized = fromProto3JSON(MessageWithValue, jsonNegInfinity);
+    // Attempting to serialize NaN, Infinity, negative Infinity results in error.
+    // "-Infinity" would parse as string_value, not number_value.
+    // https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.Value
+    assert.deepStrictEqual(
+      deserialized,
+      MessageWithValue.fromObject({
+        valueField: {
+          stringValue: '-Infinity',
+        },
+      })
+    );
   });
 
   it('serializes StringValue to proto3 JSON', () => {
