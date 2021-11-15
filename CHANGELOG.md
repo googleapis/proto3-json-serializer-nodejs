@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.1.6](https://www.github.com/googleapis/proto3-json-serializer-nodejs/compare/v0.1.5...v0.1.6) (2021-11-15)
+
+
+### Bug Fixes
+
+* **deps:** protobufjs is a dependency for the types ([#23](https://www.github.com/googleapis/proto3-json-serializer-nodejs/issues/23)) ([06470c1](https://www.github.com/googleapis/proto3-json-serializer-nodejs/commit/06470c1df501439ec3f8bc546cd23d798604f3bd))
+
 ### [0.1.5](https://www.github.com/googleapis/proto3-json-serializer-nodejs/compare/v0.1.4...v0.1.5) (2021-10-26)
 
 
