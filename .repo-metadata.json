@@ -10,6 +10,5 @@
   "distribution_name": "proto3-json-serializer",
   "api_id": "",
   "requires_billing": false,
-  "api_shortname": "proto3-json-serializer",
   "library_type": "OTHER"
 }
