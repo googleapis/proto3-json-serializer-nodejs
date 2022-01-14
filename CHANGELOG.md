@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.1.7](https://github.com/googleapis/proto3-json-serializer-nodejs/compare/v0.1.6...v0.1.7) (2022-01-14)
+
+
+### Bug Fixes
+
+* keep nano second precision when maps between JSON and proto3 ([#28](https://github.com/googleapis/proto3-json-serializer-nodejs/issues/28)) ([eaa01ce](https://github.com/googleapis/proto3-json-serializer-nodejs/commit/eaa01ce92c4eefa816d1d6f8ef6ed11bd2a6364b))
+
 ### [0.1.6](https://www.github.com/googleapis/proto3-json-serializer-nodejs/compare/v0.1.5...v0.1.6) (2021-11-15)
 
 
