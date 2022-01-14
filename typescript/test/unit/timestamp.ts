@@ -37,6 +37,10 @@ function testTimestamp(root: protobuf.Root) {
       timestamp: {seconds: 1642121565, nanos: 10000},
       value: '2022-01-14T00:52:45.000010Z',
     },
+    {
+      timestamp: {seconds: 1642121565, nanos: 123456789},
+      value: '2022-01-14T00:52:45.123456789Z',
+    },
   ];
 
   for (const mapping of testMapping) {

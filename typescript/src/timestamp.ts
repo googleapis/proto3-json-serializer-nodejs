@@ -26,19 +26,11 @@ export function googleProtobufTimestampToProto3JSON(
   // seconds is an instance of Long so it won't be undefined
   const durationSeconds = obj.seconds;
   const date = new Date(durationSeconds * 1000).toISOString();
-  let nanos = obj.nanos + '';
-  // Append leading zeros if nano string length is less than 9.
-  while (nanos.length < 9) {
-    nanos = '0' + nanos;
-  }
-  // Trim the unsignificant zeros and keep 0, 3, 6, or 9 decimal digits.
-  while (nanos.length > 3) {
-    const lastThree = nanos.substring(nanos.length - 3);
-    if (~~lastThree === 0) {
-      nanos = nanos.slice(0, -3);
-    } else {
-      break;
-    }
+  // Pad leading zeros if nano string length is less than 9.
+  let nanos = obj.nanos?.toString().padStart(9, '0');
+  // Trim the unsignificant zeros and keep 3, 6, or 9 decimal digits.
+  while (nanos && nanos.length > 3 && nanos.endsWith('000')) {
+    nanos = nanos.slice(0, -3);
   }
   return date.replace(/(?:\.\d{0,9})/, '.' + nanos);
 }
@@ -57,9 +49,7 @@ export function googleProtobufTimestampFromProto3JSON(json: string) {
   // The fractional seconds in the JSON timestamps can go up to 9 digits (i.e. up to 1 nanosecond resolution).
   // However, Javascript Date object represent any date and time to millisecond precision.
   // To keep the precision, we extract the fractional seconds and append 0 until the length is equal to 9.
-  const nanos = parseInt(
-    (json.split('.')[1].slice(0, -1) + '000000000').slice(0, 9)
-  );
+  const nanos = parseInt(json.split('.')[1].slice(0, -1).padEnd(9, '0'));
 
   const result: FromObjectValue = {};
   if (seconds !== 0) {
