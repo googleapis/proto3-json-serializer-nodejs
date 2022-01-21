@@ -41,6 +41,10 @@ function testTimestamp(root: protobuf.Root) {
       timestamp: {seconds: 1642121565, nanos: 123456789},
       value: '2022-01-14T00:52:45.123456789Z',
     },
+    {
+      timestamp: {seconds: 1640995200},
+      value: '2022-01-01T00:00:00.000Z',
+    },
   ];
 
   for (const mapping of testMapping) {
@@ -61,6 +65,25 @@ function testTimestamp(root: protobuf.Root) {
       assert.deepStrictEqual(deserialized, message);
     });
   }
+
+  describe('Timestamp has no millisecond', () => {
+    const message = MessageWithTimestamp.fromObject({
+      timestampField: {seconds: 1640995200},
+    });
+    it('serialized date has no second to proto3 JSON', () => {
+      const serialized = toProto3JSON(message);
+      assert.deepStrictEqual(serialized, {
+        timestampField: '2022-01-01T00:00:00.000Z',
+      });
+    });
+
+    it('deserializes timestamp has no second from proto3 JSON', () => {
+      const deserialized = fromProto3JSON(MessageWithTimestamp, {
+        timestampField: '2022-01-01T00:00:00Z',
+      });
+      assert.deepStrictEqual(deserialized, message);
+    });
+  });
 }
 
 testTwoTypesOfLoad('google.protobuf.Timestamp', testTimestamp);

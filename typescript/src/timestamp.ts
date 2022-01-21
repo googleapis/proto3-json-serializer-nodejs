@@ -42,15 +42,17 @@ export function googleProtobufTimestampFromProto3JSON(json: string) {
       `googleProtobufDurationFromProto3JSON: incorrect value ${json} passed as google.protobuf.Duration`
     );
   }
-
   const date = new Date(json);
   const millisecondsSinceEpoch = date.getTime();
   const seconds = Math.floor(millisecondsSinceEpoch / 1000);
   // The fractional seconds in the JSON timestamps can go up to 9 digits (i.e. up to 1 nanosecond resolution).
   // However, Javascript Date object represent any date and time to millisecond precision.
   // To keep the precision, we extract the fractional seconds and append 0 until the length is equal to 9.
-  const nanos = parseInt(json.split('.')[1].slice(0, -1).padEnd(9, '0'));
-
+  let nanos = 0;
+  const secondsFromDate = json.split('.')[1];
+  if (secondsFromDate) {
+    nanos = parseInt(secondsFromDate.slice(0, -1).padEnd(9, '0'));
+  }
   const result: FromObjectValue = {};
   if (seconds !== 0) {
     result.seconds = seconds;
