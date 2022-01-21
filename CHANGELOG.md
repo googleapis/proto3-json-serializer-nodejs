@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.1.8](https://github.com/googleapis/proto3-json-serializer-nodejs/compare/v0.1.7...v0.1.8) (2022-01-21)
+
+
+### Bug Fixes
+
+* timestamp without millisecond ([#30](https://github.com/googleapis/proto3-json-serializer-nodejs/issues/30)) ([a55d0b6](https://github.com/googleapis/proto3-json-serializer-nodejs/commit/a55d0b6f98f6d1c8b7d971d0a583bbd82ea66983))
+
 ### [0.1.7](https://github.com/googleapis/proto3-json-serializer-nodejs/compare/v0.1.6...v0.1.7) (2022-01-14)
 
 
