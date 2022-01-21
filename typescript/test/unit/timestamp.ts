@@ -68,13 +68,10 @@ function testTimestamp(root: protobuf.Root) {
 
   describe('Timestamp has no millisecond', () => {
     const message = MessageWithTimestamp.fromObject({
-      timestampField: {timestamp: {second: 1640995200, nanos: 0}},
+      timestampField: {seconds: 1640995200},
     });
-    console.log('--meesgae:: ', message);
-    // eslint-disable-next-line no-restricted-properties
-    it.only('serialized date has no second to proto3 JSON', () => {
+    it('serialized date has no second to proto3 JSON', () => {
       const serialized = toProto3JSON(message);
-      console.log('--serialized: ', serialized);
       assert.deepStrictEqual(serialized, {
         timestampField: '2022-01-01T00:00:00.000Z',
       });
