@@ -12,9 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import * as assert from 'assert';
 import {bytesFromProto3JSON, bytesToProto3JSON} from './bytes';
 import {LongStub} from './types';
+import {assert} from './util';
 
 export interface NumberValue {
   value: number | object; // Long can be passed here
