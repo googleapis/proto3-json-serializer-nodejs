@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.1.9](https://github.com/googleapis/proto3-json-serializer-nodejs/compare/v0.1.8...v0.1.9) (2022-05-11)
+
+
+### Bug Fixes
+
+* do not use Node.js assert ([#37](https://github.com/googleapis/proto3-json-serializer-nodejs/issues/37)) ([dccfeca](https://github.com/googleapis/proto3-json-serializer-nodejs/commit/dccfeca6f3bbeec29d88319f375a734ec48aadf7))
+
 ### [0.1.8](https://github.com/googleapis/proto3-json-serializer-nodejs/compare/v0.1.7...v0.1.8) (2022-01-21)
 
 
