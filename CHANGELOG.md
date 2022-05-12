@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.0.0](https://github.com/googleapis/proto3-json-serializer-nodejs/compare/v0.1.9...v1.0.0) (2022-05-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* make Node 12 minimum language version (#38)
+
+### Features
+
+* make Node 12 minimum language version ([#38](https://github.com/googleapis/proto3-json-serializer-nodejs/issues/38)) ([658d29e](https://github.com/googleapis/proto3-json-serializer-nodejs/commit/658d29e531c2d04d4007e5843aa62d9d8ee0dae8))
+
 ### [0.1.9](https://github.com/googleapis/proto3-json-serializer-nodejs/compare/v0.1.8...v0.1.9) (2022-05-11)
 
 
