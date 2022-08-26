@@ -17,7 +17,7 @@ import {JSONObject, JSONValue, LongStub} from './types';
 import {Any, googleProtobufAnyToProto3JSON} from './any';
 import {bytesToProto3JSON} from './bytes';
 import {assert, getFullyQualifiedTypeName, wrapperTypes} from './util';
-import {resolveEnumValueToString} from './enum';
+import {resolveEnumValueToNumber, resolveEnumValueToString} from './enum';
 import {
   googleProtobufListValueToProto3JSON,
   googleProtobufStructToProto3JSON,
@@ -37,11 +37,18 @@ import {
 } from './wrappers';
 import {FieldMask, googleProtobufFieldMaskToProto3JSON} from './fieldmask';
 
+export interface ToProto3JSONOptions {
+  numericEnums: boolean;
+}
+
 const id = (x: JSONValue) => {
   return x;
 };
 
-export function toProto3JSON(obj: protobuf.Message): JSONValue {
+export function toProto3JSON(
+  obj: protobuf.Message,
+  options?: ToProto3JSONOptions
+): JSONValue {
   const objType = obj.$type;
   if (!objType) {
     throw new Error(
@@ -55,7 +62,10 @@ export function toProto3JSON(obj: protobuf.Message): JSONValue {
   // Types that require special handling according to
   // https://developers.google.com/protocol-buffers/docs/proto3#json
   if (typeName === '.google.protobuf.Any') {
-    return googleProtobufAnyToProto3JSON(obj as protobuf.Message & Any);
+    return googleProtobufAnyToProto3JSON(
+      obj as protobuf.Message & Any,
+      options
+    );
   }
 
   if (typeName === '.google.protobuf.Value') {
@@ -117,7 +127,7 @@ export function toProto3JSON(obj: protobuf.Message): JSONValue {
       result[key] = value.map(
         fieldResolvedType
           ? element => {
-              return toProto3JSON(element);
+              return toProto3JSON(element, options);
             }
           : id
       );
@@ -128,7 +138,7 @@ export function toProto3JSON(obj: protobuf.Message): JSONValue {
       for (const [mapKey, mapValue] of Object.entries(value)) {
         // if the map value has a complex type, convert it to proto3 JSON, otherwise use as is
         map[mapKey] = fieldResolvedType
-          ? toProto3JSON(mapValue as protobuf.Message)
+          ? toProto3JSON(mapValue as protobuf.Message, options)
           : (mapValue as JSONValue);
       }
       result[key] = map;
@@ -139,11 +149,15 @@ export function toProto3JSON(obj: protobuf.Message): JSONValue {
       continue;
     }
     if (fieldResolvedType && 'values' in fieldResolvedType && value !== null) {
-      result[key] = resolveEnumValueToString(fieldResolvedType, value);
+      if (options?.numericEnums) {
+        result[key] = resolveEnumValueToNumber(fieldResolvedType, value);
+      } else {
+        result[key] = resolveEnumValueToString(fieldResolvedType, value);
+      }
       continue;
     }
     if (fieldResolvedType) {
-      result[key] = toProto3JSON(value);
+      result[key] = toProto3JSON(value, options);
       continue;
     }
     if (

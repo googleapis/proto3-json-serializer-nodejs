@@ -27,10 +27,19 @@ function testEnum(root: protobuf.Root) {
   const json = {
     enumField: 'KNOWN',
   };
+  const jsonWithNumber = {
+    enumField: 1,
+  };
 
   it('serializes to proto3 JSON', () => {
     const serialized = toProto3JSON(message);
     assert.deepStrictEqual(serialized, json);
+  });
+
+  it('serializes to proto3 JSON with numeric enum values', () => {
+    const serialized = toProto3JSON(message, {numericEnums: true});
+    assert.deepStrictEqual(serialized, jsonWithNumber);
+    console.log(serialized);
   });
 
   it('deserializes from proto3 JSON', () => {

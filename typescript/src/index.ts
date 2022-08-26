@@ -13,5 +13,5 @@
 // limitations under the License.
 
 export {JSONObject, JSONValue} from './types';
-export {toProto3JSON} from './toproto3json';
+export {toProto3JSON, ToProto3JSONOptions} from './toproto3json';
 export {fromProto3JSON} from './fromproto3json';
