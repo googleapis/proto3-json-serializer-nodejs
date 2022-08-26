@@ -38,3 +38,24 @@ export function resolveEnumValueToString(
     'resolveEnumValueToString: enum value must be a string or a number'
   );
 }
+
+export function resolveEnumValueToNumber(
+  enumType: protobuf.Enum,
+  enumValue: JSONValue
+) {
+  if (typeof enumValue === 'number') {
+    // return as is
+    return enumValue;
+  }
+  if (typeof enumValue === 'string') {
+    const num = enumType.values[enumValue];
+    if (typeof num === 'undefined') {
+      // unknown value, cannot convert to number, returning string as is
+      return enumValue;
+    }
+    return num;
+  }
+  throw new Error(
+    'resolveEnumValueToNumber: enum value must be a string or a number'
+  );
+}

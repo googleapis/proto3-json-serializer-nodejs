@@ -17,7 +17,7 @@
 
 import * as protobuf from 'protobufjs';
 import {fromProto3JSON} from './fromproto3json';
-import {toProto3JSON} from './toproto3json';
+import {toProto3JSON, ToProto3JSONOptions} from './toproto3json';
 import {JSONObject, JSONValue} from './types';
 
 // https://github.com/protocolbuffers/protobuf/blob/ba3836703b4a9e98e474aea2bac8c5b49b6d3b5c/python/google/protobuf/json_format.py#L850
@@ -37,7 +37,8 @@ export interface Any {
 }
 
 export function googleProtobufAnyToProto3JSON(
-  obj: protobuf.Message & Any
+  obj: protobuf.Message & Any,
+  options?: ToProto3JSONOptions
 ): JSONObject {
   // https://developers.google.com/protocol-buffers/docs/proto3#json
   // If the Any contains a value that has a special JSON mapping, it will be converted as follows:
@@ -55,7 +56,7 @@ export function googleProtobufAnyToProto3JSON(
     );
   }
   const valueMessage = type.decode(obj.value);
-  const valueProto3JSON = toProto3JSON(valueMessage);
+  const valueProto3JSON = toProto3JSON(valueMessage, options);
   if (specialJSON.has(typeName)) {
     return {
       '@type': obj.type_url,
