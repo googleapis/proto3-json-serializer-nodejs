@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.1.0](https://github.com/googleapis/proto3-json-serializer-nodejs/compare/v1.0.3...v1.1.0) (2022-08-26)
+
+
+### Features
+
+* option to serialize enum values as numbers ([#60](https://github.com/googleapis/proto3-json-serializer-nodejs/issues/60)) ([456b771](https://github.com/googleapis/proto3-json-serializer-nodejs/commit/456b771d5fef06d914c6e201fd9f17251e55d4d9))
+
+
+### Bug Fixes
+
+* remove pip install statements ([#1546](https://github.com/googleapis/proto3-json-serializer-nodejs/issues/1546)) ([#58](https://github.com/googleapis/proto3-json-serializer-nodejs/issues/58)) ([741d070](https://github.com/googleapis/proto3-json-serializer-nodejs/commit/741d0704f49332dd5d66206fcdf2111464fb8759))
+
 ## [1.0.3](https://github.com/googleapis/proto3-json-serializer-nodejs/compare/v1.0.2...v1.0.3) (2022-07-10)
 
 
