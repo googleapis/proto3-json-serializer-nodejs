@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/googleapis/proto3-json-serializer-nodejs/compare/v1.1.0...v1.1.1) (2023-04-25)
+
+
+### Bug Fixes
+
+* Repeated field can be null in JSON ([#66](https://github.com/googleapis/proto3-json-serializer-nodejs/issues/66)) ([f81d3ab](https://github.com/googleapis/proto3-json-serializer-nodejs/commit/f81d3ab202e2a674be73db8a9b74d3eecf3bbed4))
+
 ## [1.1.0](https://github.com/googleapis/proto3-json-serializer-nodejs/compare/v1.0.3...v1.1.0) (2022-08-26)
 
 
