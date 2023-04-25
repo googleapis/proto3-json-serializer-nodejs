@@ -31,8 +31,33 @@ function testRepeated(root: protobuf.Root) {
         stringField: 'value2',
       },
     ],
+    oneMoreRepeatedString: [],
   });
-  const json = {
+  const jsonWithNull = {
+    repeatedString: ['value1', 'value2', 'value3'],
+    repeatedMessage: [
+      {
+        stringField: 'value1',
+      },
+      {
+        stringField: 'value2',
+      },
+    ],
+    oneMoreRepeatedString: null,
+  };
+  const jsonWithEmptyArray = {
+    repeatedString: ['value1', 'value2', 'value3'],
+    repeatedMessage: [
+      {
+        stringField: 'value1',
+      },
+      {
+        stringField: 'value2',
+      },
+    ],
+    oneMoreRepeatedString: null,
+  };
+  const jsonWithoutEmptyArrays = {
     repeatedString: ['value1', 'value2', 'value3'],
     repeatedMessage: [
       {
@@ -46,11 +71,27 @@ function testRepeated(root: protobuf.Root) {
 
   it('serializes to proto3 JSON', () => {
     const serialized = toProto3JSON(message);
-    assert.deepStrictEqual(serialized, json);
+    assert.deepStrictEqual(serialized, jsonWithoutEmptyArrays);
   });
 
-  it('deserializes from proto3 JSON', () => {
-    const deserialized = fromProto3JSON(MessageWithRepeated, json);
+  it('deserializes from proto3 JSON with null', () => {
+    const deserialized = fromProto3JSON(MessageWithRepeated, jsonWithNull);
+    assert.deepStrictEqual(deserialized, message);
+  });
+
+  it('deserializes from proto3 JSON with an empty array', () => {
+    const deserialized = fromProto3JSON(
+      MessageWithRepeated,
+      jsonWithEmptyArray
+    );
+    assert.deepStrictEqual(deserialized, message);
+  });
+
+  it('deserializes from proto3 JSON with an omitted array field', () => {
+    const deserialized = fromProto3JSON(
+      MessageWithRepeated,
+      jsonWithoutEmptyArrays
+    );
     assert.deepStrictEqual(deserialized, message);
   });
 }
@@ -60,6 +101,7 @@ function testEmptyRepeated(root: protobuf.Root) {
   const message = MessageWithRepeated.fromObject({
     repeatedString: [],
     repeatedMessage: [],
+    oneMoreRepeatedString: [],
   });
   const json = {};
 

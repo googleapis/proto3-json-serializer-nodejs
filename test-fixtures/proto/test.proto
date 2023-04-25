@@ -63,6 +63,7 @@ message MapValue {
 message MessageWithRepeated {
     repeated string repeated_string = 3;
     repeated RepeatedValue repeated_message = 4;
+    repeated string one_more_repeated_string = 5;
 }
 
 message RepeatedValue {
