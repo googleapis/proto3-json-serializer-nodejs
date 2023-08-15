@@ -14,7 +14,7 @@
     "*.js"
   ],
   "dependencies": {
-    "google-proto-files": "^3.0.0",
+    "google-proto-files": "^4.0.0",
     "proto3-json-serializer": "^2.0.0",
     "protobufjs": "^7.0.0"
   },
