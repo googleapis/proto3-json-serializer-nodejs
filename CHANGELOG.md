@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.0.1](https://github.com/googleapis/proto3-json-serializer-nodejs/compare/v2.0.0...v2.0.1) (2024-01-16)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency google-proto-files to v4 ([#82](https://github.com/googleapis/proto3-json-serializer-nodejs/issues/82)) ([72623e0](https://github.com/googleapis/proto3-json-serializer-nodejs/commit/72623e04e1043353ef952178714ced733001a06d))
+* **deps:** Update protobufjs to 7.2.5 ([a0f5c83](https://github.com/googleapis/proto3-json-serializer-nodejs/commit/a0f5c833cba654949ec5e624fad1849020cf899d))
+
 ## [2.0.0](https://github.com/googleapis/proto3-json-serializer-nodejs/compare/v1.1.1...v2.0.0) (2023-08-07)
 
 
