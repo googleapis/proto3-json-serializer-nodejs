@@ -32,6 +32,7 @@ function testRepeated(root: protobuf.Root) {
       },
     ],
     oneMoreRepeatedString: [],
+    repeatedLong: ['9223372036854775807', '1', '-1', '0'],
   });
   const jsonWithNull = {
     repeatedString: ['value1', 'value2', 'value3'],
@@ -44,6 +45,7 @@ function testRepeated(root: protobuf.Root) {
       },
     ],
     oneMoreRepeatedString: null,
+    repeatedLong: ['9223372036854775807', '1', '-1', '0'],
   };
   const jsonWithEmptyArray = {
     repeatedString: ['value1', 'value2', 'value3'],
@@ -56,6 +58,7 @@ function testRepeated(root: protobuf.Root) {
       },
     ],
     oneMoreRepeatedString: null,
+    repeatedLong: ['9223372036854775807', '1', '-1', '0'],
   };
   const jsonWithoutEmptyArrays = {
     repeatedString: ['value1', 'value2', 'value3'],
@@ -67,6 +70,7 @@ function testRepeated(root: protobuf.Root) {
         stringField: 'value2',
       },
     ],
+    repeatedLong: ['9223372036854775807', '1', '-1', '0'],
   };
 
   it('serializes to proto3 JSON', () => {

@@ -81,6 +81,11 @@
               "keyType": "string",
               "type": "string",
               "id": 4
+            },
+            "longMapField": {
+              "keyType": "string",
+              "type": "int64",
+              "id": 5
             }
           }
         },
@@ -103,6 +108,16 @@
               "rule": "repeated",
               "type": "RepeatedValue",
               "id": 4
+            },
+            "oneMoreRepeatedString": {
+              "rule": "repeated",
+              "type": "string",
+              "id": 5
+            },
+            "repeatedLong": {
+              "rule": "repeated",
+              "type": "int64",
+              "id": 6
             }
           }
         },
