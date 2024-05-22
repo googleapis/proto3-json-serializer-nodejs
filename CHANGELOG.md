@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.2](https://github.com/googleapis/proto3-json-serializer-nodejs/compare/v2.0.1...v2.0.2) (2024-05-22)
+
+
+### Bug Fixes
+
+* Properly convert repeated int64 and maps of int64 ([#96](https://github.com/googleapis/proto3-json-serializer-nodejs/issues/96)) ([1ec05fb](https://github.com/googleapis/proto3-json-serializer-nodejs/commit/1ec05fb59edfdff7531b9372dcfe14c0fe36562c))
+
 ## [2.0.1](https://github.com/googleapis/proto3-json-serializer-nodejs/compare/v2.0.0...v2.0.1) (2024-01-16)
 
 
