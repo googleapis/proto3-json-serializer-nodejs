@@ -21,7 +21,7 @@ export interface Timestamp {
 }
 
 export function googleProtobufTimestampToProto3JSON(
-  obj: protobuf.Message & Timestamp
+  obj: protobuf.Message & Timestamp,
 ) {
   // seconds is an instance of Long so it won't be undefined
   const durationSeconds = obj.seconds;
@@ -39,7 +39,7 @@ export function googleProtobufTimestampFromProto3JSON(json: string) {
   const match = json.match(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?/);
   if (!match) {
     throw new Error(
-      `googleProtobufDurationFromProto3JSON: incorrect value ${json} passed as google.protobuf.Duration`
+      `googleProtobufDurationFromProto3JSON: incorrect value ${json} passed as google.protobuf.Duration`,
     );
   }
   const date = new Date(json);

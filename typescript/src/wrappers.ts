@@ -33,7 +33,7 @@ export interface BytesValue {
 }
 
 export function wrapperToProto3JSON(
-  obj: protobuf.Message & (NumberValue | StringValue | BoolValue | BytesValue)
+  obj: protobuf.Message & (NumberValue | StringValue | BoolValue | BytesValue),
 ) {
   if (!Object.prototype.hasOwnProperty.call(obj, 'value')) {
     return null;
@@ -44,7 +44,7 @@ export function wrapperToProto3JSON(
   if (typeof obj.value === 'object') {
     assert(
       obj.value.constructor.name === 'Long',
-      `wrapperToProto3JSON: expected to see a number, a string, a boolean, or a Long, but got ${obj.value}`
+      `wrapperToProto3JSON: expected to see a number, a string, a boolean, or a Long, but got ${obj.value}`,
     );
     return (obj.value as LongStub).toString();
   }
@@ -57,7 +57,7 @@ export function wrapperToProto3JSON(
 
 export function wrapperFromProto3JSON(
   typeName: string,
-  json: number | string | boolean | null
+  json: number | string | boolean | null,
 ) {
   if (json === null) {
     return {
@@ -67,7 +67,7 @@ export function wrapperFromProto3JSON(
   if (typeName === '.google.protobuf.BytesValue') {
     if (typeof json !== 'string') {
       throw new Error(
-        `numberWrapperFromProto3JSON: expected to get a string for google.protobuf.BytesValue but got ${typeof json}`
+        `numberWrapperFromProto3JSON: expected to get a string for google.protobuf.BytesValue but got ${typeof json}`,
       );
     }
     return {

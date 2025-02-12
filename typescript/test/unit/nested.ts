@@ -22,7 +22,7 @@ import {JSONObject} from '../../src';
 
 function testNestedMessage(root: protobuf.Root) {
   const MessageWithNestedMessage = root.lookupType(
-    'test.MessageWithNestedMessage'
+    'test.MessageWithNestedMessage',
   );
   const message = MessageWithNestedMessage.fromObject({
     innerMessage: {

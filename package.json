@@ -19,7 +19,7 @@
     "deserialization"
   ],
   "scripts": {
-    "test": "c8 node_modules/mocha/bin/mocha build/test/unit",
+    "test": "c8 mocha build/test/unit",
     "system-test": "mocha build/test/system",
     "lint": "gts lint",
     "clean": "gts clean",

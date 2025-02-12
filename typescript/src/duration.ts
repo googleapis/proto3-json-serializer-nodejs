@@ -21,7 +21,7 @@ export interface Duration {
 }
 
 export function googleProtobufDurationToProto3JSON(
-  obj: protobuf.Message & Duration
+  obj: protobuf.Message & Duration,
 ) {
   // seconds is an instance of Long so it won't be undefined
   let durationSeconds = obj.seconds.toString();
@@ -41,7 +41,7 @@ export function googleProtobufDurationFromProto3JSON(json: string) {
   const match = json.match(/^(\d*)(?:\.(\d*))?s$/);
   if (!match) {
     throw new Error(
-      `googleProtobufDurationFromProto3JSON: incorrect value ${json} passed as google.protobuf.Duration`
+      `googleProtobufDurationFromProto3JSON: incorrect value ${json} passed as google.protobuf.Duration`,
     );
   }
 

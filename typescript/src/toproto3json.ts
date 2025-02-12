@@ -54,12 +54,12 @@ function convertSingleValue(value: JSONValue | object): JSONValue {
 
 export function toProto3JSON(
   obj: protobuf.Message,
-  options?: ToProto3JSONOptions
+  options?: ToProto3JSONOptions,
 ): JSONValue {
   const objType = obj.$type;
   if (!objType) {
     throw new Error(
-      'Cannot serialize object to proto3 JSON since its .$type is unknown. Use Type.fromObject(obj) before calling toProto3JSON.'
+      'Cannot serialize object to proto3 JSON since its .$type is unknown. Use Type.fromObject(obj) before calling toProto3JSON.',
     );
   }
 
@@ -71,7 +71,7 @@ export function toProto3JSON(
   if (typeName === '.google.protobuf.Any') {
     return googleProtobufAnyToProto3JSON(
       obj as protobuf.Message & Any,
-      options
+      options,
     );
   }
 
@@ -85,32 +85,32 @@ export function toProto3JSON(
 
   if (typeName === '.google.protobuf.ListValue') {
     return googleProtobufListValueToProto3JSON(
-      obj as protobuf.Message & ListValue
+      obj as protobuf.Message & ListValue,
     );
   }
 
   if (typeName === '.google.protobuf.Duration') {
     return googleProtobufDurationToProto3JSON(
-      obj as protobuf.Message & Duration
+      obj as protobuf.Message & Duration,
     );
   }
 
   if (typeName === '.google.protobuf.Timestamp') {
     return googleProtobufTimestampToProto3JSON(
-      obj as protobuf.Message & Timestamp
+      obj as protobuf.Message & Timestamp,
     );
   }
 
   if (typeName === '.google.protobuf.FieldMask') {
     return googleProtobufFieldMaskToProto3JSON(
-      obj as protobuf.Message & FieldMask
+      obj as protobuf.Message & FieldMask,
     );
   }
 
   if (wrapperTypes.has(typeName)) {
     return wrapperToProto3JSON(
       obj as protobuf.Message &
-        (NumberValue | StringValue | BoolValue | BytesValue)
+        (NumberValue | StringValue | BoolValue | BytesValue),
     );
   }
 
@@ -136,7 +136,7 @@ export function toProto3JSON(
           ? element => {
               return toProto3JSON(element, options);
             }
-          : convertSingleValue
+          : convertSingleValue,
       );
       continue;
     }

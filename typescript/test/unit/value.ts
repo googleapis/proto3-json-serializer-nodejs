@@ -175,7 +175,7 @@ function testGoogleProtobufValue(root: protobuf.Root) {
         valueField: {
           stringValue: 'NaN',
         },
-      })
+      }),
     );
   });
 
@@ -195,7 +195,7 @@ function testGoogleProtobufValue(root: protobuf.Root) {
         valueField: {
           stringValue: 'Infinity',
         },
-      })
+      }),
     );
   });
 
@@ -215,7 +215,7 @@ function testGoogleProtobufValue(root: protobuf.Root) {
         valueField: {
           stringValue: '-Infinity',
         },
-      })
+      }),
     );
   });
 

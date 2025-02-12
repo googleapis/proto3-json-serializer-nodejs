@@ -24,7 +24,7 @@ interface TestFunction {
 
 export function testTwoTypesOfLoad(
   name: string,
-  testFunctions: TestFunction | Array<TestFunction>
+  testFunctions: TestFunction | Array<TestFunction>,
 ) {
   const functions: Array<TestFunction> = Array.isArray(testFunctions)
     ? testFunctions
@@ -32,7 +32,7 @@ export function testTwoTypesOfLoad(
   describe(name, () => {
     describe('loadSync test', () => {
       const root = protobuf.loadSync(
-        path.join(fixtures, 'proto', 'test.proto')
+        path.join(fixtures, 'proto', 'test.proto'),
       );
       functions.map(func => {
         func(root);
@@ -40,7 +40,7 @@ export function testTwoTypesOfLoad(
     });
     describe('fromJSON test', () => {
       const root = protobuf.Root.fromJSON(
-        require(path.join(fixtures, 'proto', 'test.json'))
+        require(path.join(fixtures, 'proto', 'test.json')),
       );
       functions.map(func => {
         func(root);
