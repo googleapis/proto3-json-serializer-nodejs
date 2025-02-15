@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.0.0](https://github.com/googleapis/proto3-json-serializer-nodejs/compare/v2.0.2...v3.0.0) (2025-02-15)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to node 18 ([#113](https://github.com/googleapis/proto3-json-serializer-nodejs/issues/113))
+
+### Miscellaneous Chores
+
+* Upgrade to node 18 ([#113](https://github.com/googleapis/proto3-json-serializer-nodejs/issues/113)) ([f28a826](https://github.com/googleapis/proto3-json-serializer-nodejs/commit/f28a826b838faaddb9ab93a52179e251517fad4d))
+
 ## [2.0.2](https://github.com/googleapis/proto3-json-serializer-nodejs/compare/v2.0.1...v2.0.2) (2024-05-22)
 
 
