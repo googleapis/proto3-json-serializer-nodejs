@@ -17,7 +17,7 @@ import {JSONValue} from './types';
 
 export function resolveEnumValueToString(
   enumType: protobuf.Enum,
-  enumValue: JSONValue
+  enumValue: JSONValue,
 ) {
   // for unknown enum values, do not fail and try to do the best we could.
   // protobuf.js fromObject() will likely ignore unknown values, but at least
@@ -35,13 +35,13 @@ export function resolveEnumValueToString(
     return enumValue;
   }
   throw new Error(
-    'resolveEnumValueToString: enum value must be a string or a number'
+    'resolveEnumValueToString: enum value must be a string or a number',
   );
 }
 
 export function resolveEnumValueToNumber(
   enumType: protobuf.Enum,
-  enumValue: JSONValue
+  enumValue: JSONValue,
 ) {
   if (typeof enumValue === 'number') {
     // return as is
@@ -56,6 +56,6 @@ export function resolveEnumValueToNumber(
     return num;
   }
   throw new Error(
-    'resolveEnumValueToNumber: enum value must be a string or a number'
+    'resolveEnumValueToNumber: enum value must be a string or a number',
   );
 }

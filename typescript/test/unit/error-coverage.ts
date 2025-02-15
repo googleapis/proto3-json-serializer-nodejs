@@ -231,7 +231,7 @@ function testNull(root: protobuf.Root) {
     };
     assert.deepStrictEqual(
       fromProto3JSON(MessageWithAny, emptyAnyJson),
-      emptyAny
+      emptyAny,
     );
   });
 
@@ -250,7 +250,7 @@ function testNull(root: protobuf.Root) {
     };
     assert.deepStrictEqual(
       fromProto3JSON(MessageWithAny, nullAnyJson),
-      nullAny
+      nullAny,
     );
   });
 }

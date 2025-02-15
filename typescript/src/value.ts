@@ -35,32 +35,32 @@ export interface Value {
 }
 
 export function googleProtobufStructToProto3JSON(
-  obj: protobuf.Message & Struct
+  obj: protobuf.Message & Struct,
 ) {
   const result: JSONObject = {};
   const fields = obj.fields;
   for (const [key, value] of Object.entries(fields)) {
     result[key] = googleProtobufValueToProto3JSON(
-      value as protobuf.Message & Value
+      value as protobuf.Message & Value,
     );
   }
   return result;
 }
 
 export function googleProtobufListValueToProto3JSON(
-  obj: protobuf.Message & ListValue
+  obj: protobuf.Message & ListValue,
 ) {
   assert(
     Array.isArray(obj.values),
-    'ListValue internal representation must contain array of values'
+    'ListValue internal representation must contain array of values',
   );
   return (obj.values as Array<protobuf.Message & Value>).map(
-    googleProtobufValueToProto3JSON
+    googleProtobufValueToProto3JSON,
   );
 }
 
 export function googleProtobufValueToProto3JSON(
-  obj: protobuf.Message & Value
+  obj: protobuf.Message & Value,
 ): JSONValue {
   if (Object.prototype.hasOwnProperty.call(obj, 'nullValue')) {
     return null;
@@ -95,7 +95,7 @@ export function googleProtobufValueToProto3JSON(
     typeof obj.structValue === 'object'
   ) {
     return googleProtobufStructToProto3JSON(
-      obj.structValue as protobuf.Message & Struct
+      obj.structValue as protobuf.Message & Struct,
     );
   }
 
@@ -105,7 +105,7 @@ export function googleProtobufValueToProto3JSON(
     typeof obj.listValue === 'object'
   ) {
     return googleProtobufListValueToProto3JSON(
-      obj.listValue as protobuf.Message & ListValue
+      obj.listValue as protobuf.Message & ListValue,
     );
   }
 
@@ -114,7 +114,7 @@ export function googleProtobufValueToProto3JSON(
 }
 
 export function googleProtobufStructFromProto3JSON(
-  json: JSONObject
+  json: JSONObject,
 ): FromObjectValue {
   const fields: FromObjectValue = {};
   for (const [key, value] of Object.entries(json)) {
@@ -124,7 +124,7 @@ export function googleProtobufStructFromProto3JSON(
 }
 
 export function googleProtobufListValueFromProto3JSON(
-  json: JSONValue[]
+  json: JSONValue[],
 ): FromObjectValue {
   return {
     values: json.map(element => googleProtobufValueFromProto3JSON(element)),
@@ -132,7 +132,7 @@ export function googleProtobufListValueFromProto3JSON(
 }
 
 export function googleProtobufValueFromProto3JSON(
-  json: JSONValue
+  json: JSONValue,
 ): FromObjectValue {
   if (json === null) {
     return {nullValue: 'NULL_VALUE'};
@@ -163,6 +163,6 @@ export function googleProtobufValueFromProto3JSON(
   }
 
   throw new Error(
-    `googleProtobufValueFromProto3JSON: incorrect parameter type: ${typeof json}`
+    `googleProtobufValueFromProto3JSON: incorrect parameter type: ${typeof json}`,
   );
 }

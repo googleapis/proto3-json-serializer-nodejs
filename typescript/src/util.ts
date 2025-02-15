@@ -13,7 +13,7 @@
 // limitations under the License.
 
 export function getFullyQualifiedTypeName(
-  type: protobuf.Type | protobuf.Namespace | protobuf.Enum
+  type: protobuf.Type | protobuf.Namespace | protobuf.Enum,
 ) {
   // We assume that the protobuf package tree cannot have cycles.
   let fullyQualifiedTypeName = '';

@@ -38,7 +38,7 @@ export interface Any {
 
 export function googleProtobufAnyToProto3JSON(
   obj: protobuf.Message & Any,
-  options?: ToProto3JSONOptions
+  options?: ToProto3JSONOptions,
 ): JSONObject {
   // https://developers.google.com/protocol-buffers/docs/proto3#json
   // If the Any contains a value that has a special JSON mapping, it will be converted as follows:
@@ -52,7 +52,7 @@ export function googleProtobufAnyToProto3JSON(
     type = obj.$type.root.lookupType(typeName);
   } catch (err) {
     throw new Error(
-      `googleProtobufAnyToProto3JSON: cannot find type ${typeName}: ${err}`
+      `googleProtobufAnyToProto3JSON: cannot find type ${typeName}: ${err}`,
     );
   }
   const valueMessage = type.decode(obj.value);
@@ -69,19 +69,19 @@ export function googleProtobufAnyToProto3JSON(
 
 export function googleProtobufAnyFromProto3JSON(
   root: protobuf.Root,
-  json: JSONValue
+  json: JSONValue,
 ) {
   // Not all possible JSON values can hold Any, only real objects.
   if (json === null || typeof json !== 'object' || Array.isArray(json)) {
     throw new Error(
-      'googleProtobufAnyFromProto3JSON: must be an object to decode google.protobuf.Any'
+      'googleProtobufAnyFromProto3JSON: must be an object to decode google.protobuf.Any',
     );
   }
 
   const typeUrl = json['@type'];
   if (!typeUrl || typeof typeUrl !== 'string') {
     throw new Error(
-      'googleProtobufAnyFromProto3JSON: JSON serialization of google.protobuf.Any must contain @type field'
+      'googleProtobufAnyFromProto3JSON: JSON serialization of google.protobuf.Any must contain @type field',
     );
   }
 
@@ -91,7 +91,7 @@ export function googleProtobufAnyFromProto3JSON(
     type = root.lookupType(typeName);
   } catch (err) {
     throw new Error(
-      `googleProtobufAnyFromProto3JSON: cannot find type ${typeName}: ${err}`
+      `googleProtobufAnyFromProto3JSON: cannot find type ${typeName}: ${err}`,
     );
   }
 
@@ -99,7 +99,7 @@ export function googleProtobufAnyFromProto3JSON(
   if (specialJSON.has(typeName)) {
     if (!('value' in json)) {
       throw new Error(
-        `googleProtobufAnyFromProto3JSON: JSON representation of google.protobuf.Any with type ${typeName} must contain the value field`
+        `googleProtobufAnyFromProto3JSON: JSON representation of google.protobuf.Any with type ${typeName} must contain the value field`,
       );
     }
     value = json.value;

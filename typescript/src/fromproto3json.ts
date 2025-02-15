@@ -30,7 +30,7 @@ import {googleProtobufFieldMaskFromProto3JSON} from './fieldmask';
 
 export function fromProto3JSONToInternalRepresentation(
   type: protobuf.Type | protobuf.Enum | string,
-  json: JSONValue
+  json: JSONValue,
 ): FromObjectValue {
   const fullyQualifiedTypeName =
     typeof type === 'string' ? type : getFullyQualifiedTypeName(type);
@@ -63,7 +63,7 @@ export function fromProto3JSONToInternalRepresentation(
   if (wrapperTypes.has(fullyQualifiedTypeName)) {
     if ((json !== null && typeof json === 'object') || Array.isArray(json)) {
       throw new Error(
-        `fromProto3JSONToInternalRepresentation: JSON representation for ${fullyQualifiedTypeName} expects a string, a number, or a boolean, but got ${typeof json}`
+        `fromProto3JSONToInternalRepresentation: JSON representation for ${fullyQualifiedTypeName} expects a string, a number, or a boolean, but got ${typeof json}`,
       );
     }
     return wrapperFromProto3JSON(fullyQualifiedTypeName, json);
@@ -81,12 +81,12 @@ export function fromProto3JSONToInternalRepresentation(
   if (fullyQualifiedTypeName === '.google.protobuf.Struct') {
     if (typeof json !== 'object') {
       throw new Error(
-        `fromProto3JSONToInternalRepresentation: google.protobuf.Struct must be an object but got ${typeof json}`
+        `fromProto3JSONToInternalRepresentation: google.protobuf.Struct must be an object but got ${typeof json}`,
       );
     }
     if (Array.isArray(json)) {
       throw new Error(
-        'fromProto3JSONToInternalRepresentation: google.protobuf.Struct must be an object but got an array'
+        'fromProto3JSONToInternalRepresentation: google.protobuf.Struct must be an object but got an array',
       );
     }
     return googleProtobufStructFromProto3JSON(json);
@@ -95,7 +95,7 @@ export function fromProto3JSONToInternalRepresentation(
   if (fullyQualifiedTypeName === '.google.protobuf.ListValue') {
     if (!Array.isArray(json)) {
       throw new Error(
-        `fromProto3JSONToInternalRepresentation: google.protobuf.ListValue must be an array but got ${typeof json}`
+        `fromProto3JSONToInternalRepresentation: google.protobuf.ListValue must be an array but got ${typeof json}`,
       );
     }
     return googleProtobufListValueFromProto3JSON(json);
@@ -104,7 +104,7 @@ export function fromProto3JSONToInternalRepresentation(
   if (fullyQualifiedTypeName === '.google.protobuf.Duration') {
     if (typeof json !== 'string') {
       throw new Error(
-        `fromProto3JSONToInternalRepresentation: google.protobuf.Duration must be a string but got ${typeof json}`
+        `fromProto3JSONToInternalRepresentation: google.protobuf.Duration must be a string but got ${typeof json}`,
       );
     }
     return googleProtobufDurationFromProto3JSON(json);
@@ -113,7 +113,7 @@ export function fromProto3JSONToInternalRepresentation(
   if (fullyQualifiedTypeName === '.google.protobuf.Timestamp') {
     if (typeof json !== 'string') {
       throw new Error(
-        `fromProto3JSONToInternalRepresentation: google.protobuf.Timestamp must be a string but got ${typeof json}`
+        `fromProto3JSONToInternalRepresentation: google.protobuf.Timestamp must be a string but got ${typeof json}`,
       );
     }
     return googleProtobufTimestampFromProto3JSON(json);
@@ -122,7 +122,7 @@ export function fromProto3JSONToInternalRepresentation(
   if (fullyQualifiedTypeName === '.google.protobuf.FieldMask') {
     if (typeof json !== 'string') {
       throw new Error(
-        `fromProto3JSONToInternalRepresentation: google.protobuf.FieldMask must be a string but got ${typeof json}`
+        `fromProto3JSONToInternalRepresentation: google.protobuf.FieldMask must be a string but got ${typeof json}`,
       );
     }
     return googleProtobufFieldMaskFromProto3JSON(json);
@@ -144,14 +144,14 @@ export function fromProto3JSONToInternalRepresentation(
       } else {
         if (!Array.isArray(value)) {
           throw new Error(
-            `fromProto3JSONToInternalRepresentation: expected an array for field ${key}`
+            `fromProto3JSONToInternalRepresentation: expected an array for field ${key}`,
           );
         }
         result[key] = value.map(element =>
           fromProto3JSONToInternalRepresentation(
             resolvedType || fieldType,
-            element
-          )
+            element,
+          ),
         );
       }
     } else if (field.map) {
@@ -159,7 +159,7 @@ export function fromProto3JSONToInternalRepresentation(
       for (const [mapKey, mapValue] of Object.entries(value)) {
         map[mapKey] = fromProto3JSONToInternalRepresentation(
           resolvedType || fieldType,
-          mapValue as JSONValue
+          mapValue as JSONValue,
         );
       }
       result[key] = map;
@@ -168,28 +168,28 @@ export function fromProto3JSONToInternalRepresentation(
     ) {
       if (typeof value !== 'number' && typeof value !== 'string') {
         throw new Error(
-          `fromProto3JSONToInternalRepresentation: field ${key} of type ${field.type} cannot contain value ${value}`
+          `fromProto3JSONToInternalRepresentation: field ${key} of type ${field.type} cannot contain value ${value}`,
         );
       }
       result[key] = value;
     } else if (fieldType === 'string') {
       if (typeof value !== 'string') {
         throw new Error(
-          `fromProto3JSONToInternalRepresentation: field ${key} of type ${field.type} cannot contain value ${value}`
+          `fromProto3JSONToInternalRepresentation: field ${key} of type ${field.type} cannot contain value ${value}`,
         );
       }
       result[key] = value;
     } else if (fieldType === 'bool') {
       if (typeof value !== 'boolean') {
         throw new Error(
-          `fromProto3JSONToInternalRepresentation: field ${key} of type ${field.type} cannot contain value ${value}`
+          `fromProto3JSONToInternalRepresentation: field ${key} of type ${field.type} cannot contain value ${value}`,
         );
       }
       result[key] = value;
     } else if (fieldType === 'bytes') {
       if (typeof value !== 'string') {
         throw new Error(
-          `fromProto3JSONToInternalRepresentation: field ${key} of type ${field.type} cannot contain value ${value}`
+          `fromProto3JSONToInternalRepresentation: field ${key} of type ${field.type} cannot contain value ${value}`,
         );
       }
       result[key] = bytesFromProto3JSON(value);
@@ -197,11 +197,11 @@ export function fromProto3JSONToInternalRepresentation(
       // Message type
       assert(
         resolvedType !== null,
-        `Expected to be able to resolve type for field ${field.name}`
+        `Expected to be able to resolve type for field ${field.name}`,
       );
       const deserializedValue = fromProto3JSONToInternalRepresentation(
         resolvedType!,
-        value
+        value,
       );
       result[key] = deserializedValue;
     }
@@ -218,7 +218,7 @@ export function fromProto3JSON(type: protobuf.Type, json: JSONValue) {
   // We only expect a real object here sine all special cases should be already resolved. Everything else is an internal error
   assert(
     typeof internalRepr === 'object' && !Array.isArray(internalRepr),
-    `fromProto3JSON: expected an object, not ${json}`
+    `fromProto3JSON: expected an object, not ${json}`,
   );
   return type.fromObject(internalRepr as {});
 }

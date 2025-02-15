@@ -47,7 +47,7 @@ assert(message);
 const serialized = serializer.toProto3JSON(message);
 assert.deepStrictEqual(serialized, json);
 `,
-        dependencies: ['protobufjs@^6.11.2'],
+        dependencies: ['protobufjs@^7.4.0'],
       },
     };
     await packNTest(options).catch(err => {

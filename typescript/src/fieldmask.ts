@@ -19,7 +19,7 @@ export interface FieldMask {
 }
 
 export function googleProtobufFieldMaskToProto3JSON(
-  obj: protobuf.Message & FieldMask
+  obj: protobuf.Message & FieldMask,
 ) {
   return obj.paths.join(',');
 }

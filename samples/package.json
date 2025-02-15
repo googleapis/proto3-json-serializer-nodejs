@@ -3,7 +3,7 @@
   "license": "Apache-2.0",
   "author": "Google LLC",
   "engines": {
-    "node": ">=12.0.0"
+    "node": ">=18"
   },
   "repository": "googleapis/proto3-json-serializer-nodejs",
   "private": true,

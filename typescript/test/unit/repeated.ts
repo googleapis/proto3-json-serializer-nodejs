@@ -86,7 +86,7 @@ function testRepeated(root: protobuf.Root) {
   it('deserializes from proto3 JSON with an empty array', () => {
     const deserialized = fromProto3JSON(
       MessageWithRepeated,
-      jsonWithEmptyArray
+      jsonWithEmptyArray,
     );
     assert.deepStrictEqual(deserialized, message);
   });
@@ -94,7 +94,7 @@ function testRepeated(root: protobuf.Root) {
   it('deserializes from proto3 JSON with an omitted array field', () => {
     const deserialized = fromProto3JSON(
       MessageWithRepeated,
-      jsonWithoutEmptyArrays
+      jsonWithoutEmptyArrays,
     );
     assert.deepStrictEqual(deserialized, message);
   });
