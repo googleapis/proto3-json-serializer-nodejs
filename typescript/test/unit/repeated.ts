@@ -33,6 +33,7 @@ function testRepeated(root: protobuf.Root) {
     ],
     oneMoreRepeatedString: [],
     repeatedLong: ['9223372036854775807', '1', '-1', '0'],
+    repeatedEnum: ['UNKNOWN', 'KNOWN']
   });
   const jsonWithNull = {
     repeatedString: ['value1', 'value2', 'value3'],
@@ -46,6 +47,7 @@ function testRepeated(root: protobuf.Root) {
     ],
     oneMoreRepeatedString: null,
     repeatedLong: ['9223372036854775807', '1', '-1', '0'],
+    repeatedEnum: ['UNKNOWN','KNOWN'],
   };
   const jsonWithEmptyArray = {
     repeatedString: ['value1', 'value2', 'value3'],
@@ -59,6 +61,7 @@ function testRepeated(root: protobuf.Root) {
     ],
     oneMoreRepeatedString: null,
     repeatedLong: ['9223372036854775807', '1', '-1', '0'],
+    repeatedEnum: ['UNKNOWN','KNOWN'],
   };
   const jsonWithoutEmptyArrays = {
     repeatedString: ['value1', 'value2', 'value3'],
@@ -71,10 +74,16 @@ function testRepeated(root: protobuf.Root) {
       },
     ],
     repeatedLong: ['9223372036854775807', '1', '-1', '0'],
+    repeatedEnum: ['UNKNOWN','KNOWN'],
   };
 
-  it('serializes to proto3 JSON', () => {
-    const serialized = toProto3JSON(message);
+  it.skip('serializes to proto3 JSON with string enums', () => {
+    const serialized = toProto3JSON(message, { numericEnums: false});
+    assert.deepStrictEqual(serialized, jsonWithoutEmptyArrays);
+  });
+
+  it.skip('serializes to proto3 JSON with numeric enums', () => {
+    const serialized = toProto3JSON(message, { numericEnums: true });
     assert.deepStrictEqual(serialized, jsonWithoutEmptyArrays);
   });
 

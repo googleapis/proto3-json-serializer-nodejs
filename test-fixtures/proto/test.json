@@ -118,6 +118,11 @@
               "rule": "repeated",
               "type": "int64",
               "id": 6
+            },
+            "repeatedEnum": {
+              "rule": "repeated",
+              "type": "Enum",
+              "id": 7
             }
           }
         },

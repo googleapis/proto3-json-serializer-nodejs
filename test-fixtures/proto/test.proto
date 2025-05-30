@@ -66,6 +66,7 @@ message MessageWithRepeated {
     repeated RepeatedValue repeated_message = 4;
     repeated string one_more_repeated_string = 5;
     repeated int64 repeated_long = 6;
+    repeated Enum repeated_enum = 7;
 }
 
 message RepeatedValue {
