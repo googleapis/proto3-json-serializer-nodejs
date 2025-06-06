@@ -57,7 +57,7 @@ function testRepeated(root: protobuf.Root) {
         stringField: 'value2',
       },
     ],
-    oneMoreRepeatedString: null, 
+    oneMoreRepeatedString: null,
     repeatedLong: ['9223372036854775807', '1', '-1', '0'],
   };
   const jsonWithoutEmptyArrays = {
@@ -74,7 +74,7 @@ function testRepeated(root: protobuf.Root) {
   };
 
   it('serializes to proto3 JSON', () => {
-    const serialized = toProto3JSON(message, { numericEnums: true });
+    const serialized = toProto3JSON(message, {numericEnums: true});
     assert.deepStrictEqual(serialized, jsonWithoutEmptyArrays);
   });
 
@@ -127,29 +127,35 @@ function testRepeatedEnum(root: protobuf.Root) {
     repeatedEnum: ['UNKNOWN', 'KNOWN'],
   });
   const jsonWithNumericEnums = {
-    repeatedEnum: [0, 1]
-  }
+    repeatedEnum: [0, 1],
+  };
   const jsonWithStringEnums = {
-    repeatedEnum: ['UNKNOWN', 'KNOWN']
-  }
+    repeatedEnum: ['UNKNOWN', 'KNOWN'],
+  };
 
   it('serializes to proto3 JSON with numeric enums', () => {
-    const serialized = toProto3JSON(message, { numericEnums: true });
+    const serialized = toProto3JSON(message, {numericEnums: true});
     assert.deepStrictEqual(serialized, jsonWithNumericEnums);
   });
 
   it('serializes to proto3 JSON with string enums', () => {
-    const serialized = toProto3JSON(message, { numericEnums: false });
+    const serialized = toProto3JSON(message, {numericEnums: false});
     assert.deepStrictEqual(serialized, jsonWithStringEnums);
   });
 
   it('deserializes from proto3 JSON with numeric enums', () => {
-    const deserialized = fromProto3JSON(MessageWithRepeated, jsonWithNumericEnums);
+    const deserialized = fromProto3JSON(
+      MessageWithRepeated,
+      jsonWithNumericEnums,
+    );
     assert.deepStrictEqual(deserialized, message);
   });
 
   it('deserializes from proto3 JSON with string enums', () => {
-    const deserialized = fromProto3JSON(MessageWithRepeated, jsonWithStringEnums);
+    const deserialized = fromProto3JSON(
+      MessageWithRepeated,
+      jsonWithStringEnums,
+    );
     assert.deepStrictEqual(deserialized, message);
   });
 }

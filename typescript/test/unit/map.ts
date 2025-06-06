@@ -18,7 +18,6 @@ import {it} from 'mocha';
 import {fromProto3JSON} from '../../src/fromproto3json';
 import {toProto3JSON} from '../../src/toproto3json';
 import {testTwoTypesOfLoad} from './common';
-import { json } from 'stream/consumers';
 
 function testMap(root: protobuf.Root) {
   const MessageWithMap = root.lookupType('test.MessageWithMap');
@@ -80,8 +79,8 @@ function testEnumMap(root: protobuf.Root) {
   const message = MessageWithMap.fromObject({
     enumMapField: {
       key1: 'UNKNOWN',
-      key2: 'KNOWN'
-    }
+      key2: 'KNOWN',
+    },
   });
   const jsonWithStringEnums = {
     mapField: {},
@@ -89,8 +88,8 @@ function testEnumMap(root: protobuf.Root) {
     longMapField: {},
     enumMapField: {
       key1: 'UNKNOWN',
-      key2: 'KNOWN'
-    }
+      key2: 'KNOWN',
+    },
   };
   const jsonWithNumericEnums = {
     mapField: {},
@@ -98,17 +97,17 @@ function testEnumMap(root: protobuf.Root) {
     longMapField: {},
     enumMapField: {
       key1: 0,
-      key2: 1
-    }
+      key2: 1,
+    },
   };
 
   it('serializes to proto3 JSON with string enums', () => {
-    const serialized = toProto3JSON(message, { numericEnums: false });
+    const serialized = toProto3JSON(message, {numericEnums: false});
     assert.deepStrictEqual(serialized, jsonWithStringEnums);
   });
 
   it('serializes to proto3 JSON with numeric enums', () => {
-    const serialized = toProto3JSON(message, { numericEnums: true });
+    const serialized = toProto3JSON(message, {numericEnums: true});
     assert.deepStrictEqual(serialized, jsonWithNumericEnums);
   });
 
@@ -123,5 +122,53 @@ function testEnumMap(root: protobuf.Root) {
   });
 }
 
-//testTwoTypesOfLoad('map fields', testMap);
+function testEnumMap(root: protobuf.Root) {
+  const MessageWithMap = root.lookupType('test.MessageWithMap');
+  const message = MessageWithMap.fromObject({
+    enumMapField: {
+      key1: 'UNKNOWN',
+      key2: 'KNOWN',
+    },
+  });
+  const jsonWithStringEnums = {
+    mapField: {},
+    stringMapField: {},
+    longMapField: {},
+    enumMapField: {
+      key1: 'UNKNOWN',
+      key2: 'KNOWN',
+    },
+  };
+  const jsonWithNumericEnums = {
+    mapField: {},
+    stringMapField: {},
+    longMapField: {},
+    enumMapField: {
+      key1: 0,
+      key2: 1,
+    },
+  };
+
+  it('serializes to proto3 JSON with string enums', () => {
+    const serialized = toProto3JSON(message, {numericEnums: false});
+    assert.deepStrictEqual(serialized, jsonWithStringEnums);
+  });
+
+  it('serializes to proto3 JSON with numeric enums', () => {
+    const serialized = toProto3JSON(message, {numericEnums: true});
+    assert.deepStrictEqual(serialized, jsonWithNumericEnums);
+  });
+
+  it('deserializes from proto3 JSON with string enums', () => {
+    const deserialized = fromProto3JSON(MessageWithMap, jsonWithStringEnums);
+    assert.deepStrictEqual(deserialized, message);
+  });
+
+  it('deserializes from proto3 JSON with numeric enums', () => {
+    const deserialized = fromProto3JSON(MessageWithMap, jsonWithNumericEnums);
+    assert.deepStrictEqual(deserialized, message);
+  });
+}
+
+testTwoTypesOfLoad('map fields', testMap);
 testTwoTypesOfLoad('enum map fields', testEnumMap);
