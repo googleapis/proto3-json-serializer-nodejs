@@ -130,12 +130,22 @@ export function toProto3JSON(
         // ignore repeated fields with no values
         continue;
       }
-      // if the repeated value has a complex type, convert it to proto3 JSON, otherwise use as is
       result[key] = value.map(
         fieldResolvedType
+          // if the repeated value is an enum, resolve the values
+          ? 'values' in fieldResolvedType
           ? element => {
+            if (options?.numericEnums) {
+              return resolveEnumValueToNumber(fieldResolvedType, element);
+            } else {
+              return resolveEnumValueToString(fieldResolvedType, element);
+            }
+          }
+          // if the repeated value has a complex type, convert if to proto3 JSON
+          : element => {
               return toProto3JSON(element, options);
             }
+          // otherwise, use as is
           : convertSingleValue,
       );
       continue;
