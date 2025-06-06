@@ -55,6 +55,7 @@ message MessageWithMap {
     map<string, MapValue> map_field = 3;
     map<string, string> string_map_field = 4;
     map<string, int64> long_map_field = 5;
+    map<string, Enum> enum_map_field = 6;
 }
 
 message MapValue {
