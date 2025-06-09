@@ -74,7 +74,7 @@ function testRepeated(root: protobuf.Root) {
   };
 
   it('serializes to proto3 JSON', () => {
-    const serialized = toProto3JSON(message, {numericEnums: true});
+    const serialized = toProto3JSON(message);
     assert.deepStrictEqual(serialized, jsonWithoutEmptyArrays);
   });
 
