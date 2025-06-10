@@ -86,6 +86,11 @@
               "keyType": "string",
               "type": "int64",
               "id": 5
+            },
+            "enumMapField": {
+              "keyType": "string",
+              "type": "Enum",
+              "id": 6
             }
           }
         },
@@ -118,6 +123,11 @@
               "rule": "repeated",
               "type": "int64",
               "id": 6
+            },
+            "repeatedEnum": {
+              "rule": "repeated",
+              "type": "Enum",
+              "id": 7
             }
           }
         },
