@@ -130,23 +130,45 @@ export function toProto3JSON(
         // ignore repeated fields with no values
         continue;
       }
-      // if the repeated value has a complex type, convert it to proto3 JSON, otherwise use as is
       result[key] = value.map(
         fieldResolvedType
-          ? element => {
-              return toProto3JSON(element, options);
-            }
-          : convertSingleValue,
+          ? // if the repeated value is an enum, resolve the values
+            'values' in fieldResolvedType
+            ? element => {
+                if (options?.numericEnums) {
+                  return resolveEnumValueToNumber(fieldResolvedType, element);
+                } else {
+                  return resolveEnumValueToString(fieldResolvedType, element);
+                }
+              }
+            : // if the repeated value has a complex type, convert it to proto3 JSON
+              element => {
+                return toProto3JSON(element, options);
+              }
+          : // otherwise, use the value as-is
+            convertSingleValue,
       );
       continue;
     }
     if (field.map) {
       const map: JSONObject = {};
       for (const [mapKey, mapValue] of Object.entries(value)) {
-        // if the map value has a complex type, convert it to proto3 JSON, otherwise use as is
         map[mapKey] = fieldResolvedType
-          ? toProto3JSON(mapValue as protobuf.Message, options)
-          : convertSingleValue(mapValue as JSONValue);
+          ? // if the map value is an enum, resolve the values
+            'values' in fieldResolvedType
+            ? options?.numericEnums
+              ? resolveEnumValueToNumber(
+                  fieldResolvedType,
+                  mapValue as JSONValue,
+                )
+              : resolveEnumValueToString(
+                  fieldResolvedType,
+                  mapValue as JSONValue,
+                )
+            : //  if the value is a complex type, convert it to proto3 JSON
+              toProto3JSON(mapValue as protobuf.Message, options)
+          : // otherwise use the value as-is
+            convertSingleValue(mapValue as JSONValue);
       }
       result[key] = map;
       continue;
