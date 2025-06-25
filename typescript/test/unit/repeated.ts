@@ -106,6 +106,7 @@ function testEmptyRepeated(root: protobuf.Root) {
     repeatedString: [],
     repeatedMessage: [],
     oneMoreRepeatedString: [],
+    repeatedEnum: [],
   });
   const json = {};
 
@@ -120,5 +121,45 @@ function testEmptyRepeated(root: protobuf.Root) {
   });
 }
 
+function testRepeatedEnum(root: protobuf.Root) {
+  const MessageWithRepeated = root.lookupType('test.MessageWithRepeated');
+  const message = MessageWithRepeated.fromObject({
+    repeatedEnum: ['UNKNOWN', 'KNOWN'],
+  });
+  const jsonWithNumericEnums = {
+    repeatedEnum: [0, 1],
+  };
+  const jsonWithStringEnums = {
+    repeatedEnum: ['UNKNOWN', 'KNOWN'],
+  };
+
+  it('serializes to proto3 JSON with numeric enums', () => {
+    const serialized = toProto3JSON(message, {numericEnums: true});
+    assert.deepStrictEqual(serialized, jsonWithNumericEnums);
+  });
+
+  it('serializes to proto3 JSON with string enums', () => {
+    const serialized = toProto3JSON(message, {numericEnums: false});
+    assert.deepStrictEqual(serialized, jsonWithStringEnums);
+  });
+
+  it('deserializes from proto3 JSON with numeric enums', () => {
+    const deserialized = fromProto3JSON(
+      MessageWithRepeated,
+      jsonWithNumericEnums,
+    );
+    assert.deepStrictEqual(deserialized, message);
+  });
+
+  it('deserializes from proto3 JSON with string enums', () => {
+    const deserialized = fromProto3JSON(
+      MessageWithRepeated,
+      jsonWithStringEnums,
+    );
+    assert.deepStrictEqual(deserialized, message);
+  });
+}
+
 testTwoTypesOfLoad('repeated fields', testRepeated);
 testTwoTypesOfLoad('empty repeated fields', testEmptyRepeated);
+testTwoTypesOfLoad('repeated enums', testRepeatedEnum);
