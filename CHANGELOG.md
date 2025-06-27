@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.0.1](https://github.com/googleapis/proto3-json-serializer-nodejs/compare/v3.0.0...v3.0.1) (2025-06-27)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency google-proto-files to v5 ([#124](https://github.com/googleapis/proto3-json-serializer-nodejs/issues/124)) ([716bb43](https://github.com/googleapis/proto3-json-serializer-nodejs/commit/716bb43b1c762b9d22b6d3097ba5f13169889dcc))
+* Fix enum serialization in maps and repeated fields ([#129](https://github.com/googleapis/proto3-json-serializer-nodejs/issues/129)) ([d84540a](https://github.com/googleapis/proto3-json-serializer-nodejs/commit/d84540a956d598d2977f5b98718a55cd8b5b2f15))
+
 ## [3.0.0](https://github.com/googleapis/proto3-json-serializer-nodejs/compare/v2.0.2...v3.0.0) (2025-02-15)
 
 
