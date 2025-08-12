@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.2](https://github.com/googleapis/proto3-json-serializer-nodejs/compare/v3.0.1...v3.0.2) (2025-08-12)
+
+
+### Bug Fixes
+
+* Switch typescript to tilde notation ([#137](https://github.com/googleapis/proto3-json-serializer-nodejs/issues/137)) ([4ec0dd0](https://github.com/googleapis/proto3-json-serializer-nodejs/commit/4ec0dd09201b07f30e5fcf5712198604d47d0cf9))
+
 ## [3.0.1](https://github.com/googleapis/proto3-json-serializer-nodejs/compare/v3.0.0...v3.0.1) (2025-06-27)
 
 
