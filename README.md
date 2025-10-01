@@ -1,3 +1,5 @@
+**_THIS REPOSITORY IS DEPRECATED. ALL OF ITS CONTENT AND HISTORY HAS BEEN MOVED TO [MONOREPO-TEST](https://github.com/googleapis/google-cloud-node-core/tree/main/packages/proto3-json-serializer-nodejs)_**
+
 # proto3 JSON serializer for TypeScript / JavaScript
 
 This library implements proto3 JSON serialization and deserialization for
